@@ -1,10 +1,14 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 
+import { asyncNoop, isNotNil, noop } from 'es-toolkit'
+import { flushSync } from 'react-dom'
+
 import type { ITheme, IThemeProviderProps, IThemeProviderState } from '@/app/common/providers/theme/interface'
 
 const initialState: IThemeProviderState = {
   theme: 'light',
-  setTheme: () => null,
+  setTheme: noop,
+  toggleTheme: asyncNoop,
 }
 
 const ThemeProviderContext = createContext<IThemeProviderState>(initialState)
@@ -25,12 +29,24 @@ function ThemeProvider({
     root.classList.add(theme)
   }, [theme])
 
+  const toggleTheme = async () => {
+    if (isNotNil(document.startViewTransition)) {
+      await document.startViewTransition(() => {
+        flushSync(() => {
+          setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
+        })
+      }).ready
+    } else {
+      setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
+    }
+  }
   const value = {
     theme,
     setTheme: (newTheme: ITheme) => {
       localStorage.setItem(storageKey, newTheme)
       setTheme(newTheme)
     },
+    toggleTheme,
   }
 
   return (

@@ -11,6 +11,7 @@ type IThemeProviderProps = {
 type IThemeProviderState = {
   theme: ITheme
   setTheme: (theme: ITheme) => void
+  toggleTheme: () => Promise<void>
 }
 
 export type { IThemeProviderProps, IThemeProviderState, ITheme }

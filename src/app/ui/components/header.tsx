@@ -8,18 +8,15 @@ import { Button } from '@/app/ui/components/button'
 import { useTheme } from '@/app/common/providers/theme/provider'
 
 const Header: FC = () => {
-  const { setTheme, theme } = useTheme()
-  const handleToggleTheme = () => {
-    if (theme === 'light') setTheme('dark')
-    else setTheme('light')
-  }
+  const { toggleTheme, theme } = useTheme()
+
   return (
     <header className="bg-background px-[50px] py-2 border-b border-border flex w-full box-border flex-row justify-between items-center ">
       <div className="flex gap-4">
         <Back />
         <Breadcrumbs />
       </div>
-      <Button size="icon" onClick={handleToggleTheme}>
+      <Button size="icon" onClick={toggleTheme}>
         {theme === 'light' ? <Sun /> : <Moon />}
       </Button>
     </header>

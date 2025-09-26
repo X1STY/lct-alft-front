@@ -1,5 +1,5 @@
 enum ERouterPath {
-  BASE = '/',
+  SESSIONS = '/sessions',
 }
 
 enum EIdentifyRoutePath {

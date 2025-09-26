@@ -10,6 +10,7 @@ import { RouterProvider } from '@tanstack/react-router'
 
 import { TanstackQueryProvider } from '@/app/common/providers/tanstack-query/provider'
 import { ROUTER } from '@/app/router/const'
+import { ThemeProvider } from '@/app/common/providers/theme/provider'
 
 setDefaultOptions({ locale: ru })
 
@@ -20,7 +21,9 @@ if (rootElement && !rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <TanstackQueryProvider>
-        <RouterProvider router={ROUTER} />
+        <ThemeProvider>
+          <RouterProvider router={ROUTER} />
+        </ThemeProvider>
       </TanstackQueryProvider>
     </StrictMode>,
   )

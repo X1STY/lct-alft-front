@@ -21,5 +21,21 @@ export default defineConfig({
     minify: 'oxc',
     cssMinify: 'lightningcss',
     cssCodeSplit: true,
+    rolldownOptions: {
+      output: {
+        advancedChunks: {
+          groups: [
+            {
+              test: /components/,
+              name: 'components',
+            },
+            {
+              test: /repository/,
+              name: 'repository',
+            },
+          ],
+        },
+      },
+    },
   },
 })

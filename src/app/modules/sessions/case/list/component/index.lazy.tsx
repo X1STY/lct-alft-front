@@ -9,11 +9,11 @@ import { GetSessionsPortSchema } from '@/app/modules/sessions/case/list/validati
 import { ERouterPath } from '@/domain/common/router/enum'
 import { ESessionStatus } from '@/domain/common/sessions/enum'
 import { useGetSessionListPresenter } from '@/app/modules/sessions/case/list/case/presenter'
-import { Button } from '@/app/ui/components/button'
 import { Tabs, TabsList, TabsTrigger } from '@/app/ui/components/tabs'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/ui/components/select'
 import { DataTable } from '@/app/ui/components/data-table'
 import { sessionsColumns } from '@/app/modules/sessions/case/list/table/columns'
+import { NewSessionDialog } from '@/app/common/components/new-session'
 
 const SessionsListPage = () => {
   const filters = useForm<IGetSessionsPort>({
@@ -32,7 +32,7 @@ const SessionsListPage = () => {
       <section className="flex flex-col gap-5">
         <div className="flex flex-row items-center justify-between">
           <h2 className="font-semibold text-3xl">Управление наборами инструментов</h2>
-          <Button>Выдать набор инструментов</Button>
+          <NewSessionDialog />
         </div>
         <div className="flex flex-row items-center justify-between">
           <Tabs
@@ -103,7 +103,7 @@ const SessionsListPage = () => {
   )
 }
 
-const SessionsListPageRoute = createLazyRoute(ERouterPath.BASE)({
+const SessionsListPageRoute = createLazyRoute(ERouterPath.SESSIONS)({
   component: SessionsListPage,
 })
 

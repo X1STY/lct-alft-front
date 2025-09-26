@@ -4,8 +4,13 @@ import { MODULE_PAGE_ROUTE } from '@/app/router/const'
 import { ERouterPath } from '@/domain/common/router/enum'
 
 const SESSION_LIST_PAGE_ROUTE = createRoute({
-  path: ERouterPath.BASE,
+  path: ERouterPath.SESSIONS,
   getParentRoute: () => MODULE_PAGE_ROUTE,
+  loader: () => {
+    return {
+      crumb: 'Список сессий',
+    }
+  },
 }).lazy(async () => import('../case/list/component/index.lazy').then((d) => d.SessionsListPageRoute))
 
 export { SESSION_LIST_PAGE_ROUTE }

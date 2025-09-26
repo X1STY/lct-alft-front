@@ -28,10 +28,10 @@ const SessionsListPage = () => {
   const { data, isLoading } = useGetSessionListPresenter({ status, kitId, employeeId })
   console.log(data)
   return (
-    <div className="flex flex-col gap-6 w-full">
+    <div className="flex w-full flex-col gap-6">
       <section className="flex flex-col gap-5">
         <div className="flex flex-row items-center justify-between">
-          <h2 className="font-semibold text-3xl">Управление наборами инструментов</h2>
+          <h2 className="text-3xl font-semibold">Управление наборами инструментов</h2>
           <NewSessionDialog />
         </div>
         <div className="flex flex-row items-center justify-between">
@@ -52,7 +52,7 @@ const SessionsListPage = () => {
               onValueChange={(value) => {
                 filters.setValue('employeeId', value === 'all' ? '' : value)
               }}>
-              <SelectTrigger className="w-[250px] bg-background">
+              <SelectTrigger className="bg-background w-[250px]">
                 <SelectValue placeholder="Выберете сотрудника" />
               </SelectTrigger>
               <SelectContent>
@@ -76,7 +76,7 @@ const SessionsListPage = () => {
               onValueChange={(value) => {
                 filters.setValue('kitId', value === 'all' ? '' : value)
               }}>
-              <SelectTrigger className="w-[250px] bg-background">
+              <SelectTrigger className="bg-background w-[250px]">
                 <SelectValue placeholder="Выберете набор" />
               </SelectTrigger>
               <SelectContent>

@@ -116,10 +116,10 @@ export function ImageUploader({
     <div className={cn('space-y-4', className)}>
       <div
         className={cn(
-          'relative border-2 border-dashed rounded-lg p-6 transition-colors cursor-pointer',
+          'relative cursor-pointer rounded-lg border-2 border-dashed p-6 transition-colors',
           'hover:border-primary/50 hover:bg-accent/50',
           isDragOver && 'border-primary bg-primary/5',
-          disabled && 'opacity-50 cursor-not-allowed',
+          disabled && 'cursor-not-allowed opacity-50',
           Boolean(displayError) && 'border-destructive',
         )}
         onDragOver={handleDragOver}
@@ -136,11 +136,11 @@ export function ImageUploader({
         />
 
         <div className="flex flex-col items-center justify-center text-center">
-          <Upload className="h-10 w-10 text-muted-foreground mb-4" />
-          <p className="text-sm font-medium mb-2">
+          <Upload className="text-muted-foreground mb-4 h-10 w-10" />
+          <p className="mb-2 text-sm font-medium">
             {isDragOver ? 'Drop image here' : 'Click to upload or drag and drop'}
           </p>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             {acceptedTypes
               .map((type) => type.split('/')[1])
               .join(', ')
@@ -151,18 +151,18 @@ export function ImageUploader({
       </div>
 
       {isNotNil(displayError) && (
-        <div className="text-sm text-destructive bg-destructive/10 p-3 rounded-md">{displayError}</div>
+        <div className="text-destructive bg-destructive/10 rounded-md p-3 text-sm">{displayError}</div>
       )}
 
       {isNotNil(previewUrl) && (
-        <div className="relative group max-w-xs">
-          <div className="aspect-square rounded-lg overflow-hidden border bg-muted">
-            <img src={previewUrl} alt="Selected image" className="w-full h-full object-cover" />
+        <div className="group relative max-w-xs">
+          <div className="bg-muted aspect-square overflow-hidden rounded-lg border">
+            <img src={previewUrl} alt="Selected image" className="h-full w-full object-cover" />
           </div>
           <Button
             variant="destructive"
             size="icon"
-            className="absolute -top-2 -right-2 h-6 w-6 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute -top-2 -right-2 h-6 w-6 rounded-full opacity-0 transition-opacity group-hover:opacity-100"
             onClick={(e) => {
               e.stopPropagation()
               removeImage()

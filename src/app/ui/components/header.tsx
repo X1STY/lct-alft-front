@@ -11,7 +11,7 @@ const Header: FC = () => {
   const { toggleTheme, theme } = useTheme()
 
   return (
-    <header className="bg-background px-[50px] py-2 border-b border-border flex w-full box-border flex-row justify-between items-center ">
+    <header className="bg-background border-border box-border flex w-full flex-row items-center justify-between border-b px-[50px] py-2">
       <div className="flex gap-4">
         <Back />
         <Breadcrumbs />

@@ -26,7 +26,7 @@ const Breadcrumbs: FC = () => {
         const isLast = index === breadcrumbs.length - 1
 
         return (
-          <div key={url} className="flex flex-row items-center gap-2 text-tertiary">
+          <div key={url} className="flex flex-row items-center gap-2">
             {isLast ? (
               <div className="text-md font-semibold">{crumb}</div>
             ) : (

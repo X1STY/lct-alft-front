@@ -16,7 +16,7 @@ const sessionsColumns: Array<ColumnDef<ISessionDto>> = [
   {
     accessorKey: 'id',
     header: 'ID',
-    cell: ({ row }) => <div className="font-mono text-sm text-muted-foreground">{row.getValue<string>('id')}</div>,
+    cell: ({ row }) => <div className="text-muted-foreground font-mono text-sm">{row.getValue<string>('id')}</div>,
   },
   {
     accessorKey: 'user',

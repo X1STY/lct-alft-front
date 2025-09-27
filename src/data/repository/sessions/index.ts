@@ -14,7 +14,7 @@ const mockSessions: Array<ISessionDto> = [
     giver_id: '2',
     location_id: '1',
     kit_id: '1111',
-    status: ESessionStatus.OPENED,
+    status: ESessionStatus.CLOSED,
     opened_at: '2024-01-15T09:30:00Z',
     given_image_url: 'https://example.com/images/given1.jpg',
     created_at: '2024-01-15T09:00:00Z',

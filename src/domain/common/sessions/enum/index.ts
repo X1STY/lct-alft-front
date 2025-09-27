@@ -16,4 +16,13 @@ const SessionStatusName = {
   [ESessionStatus.CLOSED]: 'Закрыта',
 }
 
-export { ESessionStatus, SessionStatusName }
+const SessionStatusColor = {
+  [ESessionStatus.OPEN_WAITING_FOR_APPROVAL]: 'bg-sky-600 text-white',
+  [ESessionStatus.OPEN_APPROVED]: 'bg-sky-600 text-white',
+  [ESessionStatus.OPENED]: 'bg-green-300 text-black',
+  [ESessionStatus.CLOSE_WAITING_FOR_APPROVAL]: 'bg-amber-500 text-white',
+  [ESessionStatus.CLOSE_APPROVED]: 'bg-amber-500 text-white',
+  [ESessionStatus.CLOSED]: 'bg-red-400 text-white',
+}
+
+export { ESessionStatus, SessionStatusName, SessionStatusColor }

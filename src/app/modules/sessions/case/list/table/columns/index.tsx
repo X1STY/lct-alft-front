@@ -40,7 +40,7 @@ const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
       },
       {
         accessorKey: 'reciever_id',
-        header: 'Сотрудник',
+        header: 'Получатель',
         cell: (cell) => {
           const receiverId = cell.getValue<string>()
           const employeeName = findEmployeeName(receiverId)

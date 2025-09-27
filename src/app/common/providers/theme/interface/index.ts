@@ -4,7 +4,6 @@ type ITheme = 'dark' | 'light'
 
 type IThemeProviderProps = {
   children: ReactNode
-  defaultTheme?: ITheme
   storageKey?: string
 }
 

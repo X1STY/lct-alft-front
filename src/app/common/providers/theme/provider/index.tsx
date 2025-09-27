@@ -13,12 +13,8 @@ const initialState: IThemeProviderState = {
 
 const ThemeProviderContext = createContext<IThemeProviderState>(initialState)
 
-function ThemeProvider({
-  children,
-  defaultTheme = 'light',
-  storageKey = 'vite-ui-theme',
-  ...props
-}: IThemeProviderProps) {
+function ThemeProvider({ children, storageKey = 'vite-ui-theme', ...props }: IThemeProviderProps) {
+  const defaultTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   const [theme, setTheme] = useState<ITheme>(() => (localStorage.getItem(storageKey) as ITheme) ?? defaultTheme)
 
   useEffect(() => {

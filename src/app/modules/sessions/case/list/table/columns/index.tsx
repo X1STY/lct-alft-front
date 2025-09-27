@@ -1,73 +1,100 @@
 'use client'
 
+import { useMemo } from 'react'
 import { format } from 'date-fns'
 
 import type { ColumnDef } from '@tanstack/react-table'
 
 import type { ISessionDto } from '@/domain/session/interface/dto'
-
 import type { ESessionStatus } from '@/domain/common/sessions/enum'
 
 import { SessionStatusName } from '@/domain/common/sessions/enum'
 import { Badge } from '@/app/ui/components/badge'
 import { Button } from '@/app/ui/components/button'
+import { useCollectionsContext } from '@/app/common/providers/collections/context'
 
-const sessionsColumns: Array<ColumnDef<ISessionDto>> = [
-  {
-    accessorKey: 'id',
-    header: 'ID',
-    cell: ({ row }) => <div className="text-muted-foreground font-mono text-sm">{row.getValue<string>('id')}</div>,
-  },
-  {
-    accessorKey: 'user',
-    header: 'Сотрудник',
-    cell: ({ row }) => <div className="font-medium">{row.getValue<string>('user')}</div>,
-  },
-  {
-    accessorKey: 'kit',
-    header: 'Набор',
-    cell: ({ row }) => <div>{row.getValue<string>('kit')}</div>,
-  },
-  {
-    accessorKey: 'createdAt',
-    header: 'Время открытия',
-    cell: ({ row }) => {
-      const date = row.getValue<Date>('createdAt')
-      return <div className="text-sm">{format(date, 'd MMMM, HH:mm')}</div>
-    },
-  },
-  {
-    accessorKey: 'status',
-    header: 'Статус',
-    cell: ({ row }) => {
-      const status = row.getValue<ESessionStatus>('status')
-      const statusText = SessionStatusName[status]
+const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
+  const { employeesCollection, kitCollection, locationCollection } = useCollectionsContext()
 
-      const getStatusVariant = () => {
-        switch (status) {
-          case 0:
-            return 'secondary'
-          case 1:
-            return 'default'
-          case 2:
-            return 'outline'
-          default:
-            return 'secondary'
-        }
-      }
+  const findEmployeeName = (id: string): string => {
+    const employee = employeesCollection.find((emp) => emp.id === id)
+    return employee?.name ?? ''
+  }
 
-      return <Badge variant={getStatusVariant()}>{statusText}</Badge>
-    },
-  },
-  {
-    id: 'actions',
-    header: '',
-    cell: () => (
-      <Button variant="ghost" size="sm">
-        Детали сессии
-      </Button>
-    ),
-  },
-]
+  const findKitName = (id: string): string => {
+    const kit = kitCollection.find((kit) => kit.id === id)
+    return kit?.name ?? ''
+  }
 
-export { sessionsColumns }
+  const findLocationName = (id: string): string => {
+    const location = locationCollection.find((loc) => loc.id === id)
+    return location?.name ?? ''
+  }
+
+  return useMemo(
+    () => [
+      {
+        accessorKey: 'id',
+        header: 'ID',
+        cell: (cell) => <div className="text-muted-foreground font-mono text-sm">{cell.getValue<string>()}</div>,
+      },
+      {
+        accessorKey: 'reciever_id',
+        header: 'Сотрудник',
+        cell: (cell) => {
+          const receiverId = cell.getValue<string>()
+          const employeeName = findEmployeeName(receiverId)
+          return <div className="font-medium">{employeeName}</div>
+        },
+      },
+      {
+        accessorKey: 'kit_id',
+        header: 'Набор',
+        cell: (cell) => {
+          const kitId = cell.getValue<string>()
+          const kitName = findKitName(kitId)
+          return <div>{kitName}</div>
+        },
+      },
+      {
+        accessorKey: 'location_id',
+        header: 'Локация',
+        cell: (cell) => {
+          const locationId = cell.getValue<string>()
+          const locationName = findLocationName(locationId)
+          return <div>{locationName}</div>
+        },
+      },
+      {
+        accessorKey: 'opened_at',
+        header: 'Время открытия',
+        cell: (cell) => {
+          const date = cell.getValue<Date>()
+          return <div className="text-sm">{format(date, 'd MMMM, HH:mm')}</div>
+        },
+      },
+      {
+        accessorKey: 'status',
+        header: 'Статус',
+        cell: (cell) => {
+          const status = cell.getValue<ESessionStatus>()
+          const statusText = SessionStatusName[status]
+
+          return <Badge>{statusText}</Badge>
+        },
+      },
+      {
+        id: 'actions',
+        header: '',
+        cell: () => (
+          <Button variant="ghost" size="sm">
+            Детали сессии
+          </Button>
+        ),
+      },
+    ],
+    [employeesCollection, kitCollection, locationCollection],
+  )
+}
+
+export { useSessionsColumns }

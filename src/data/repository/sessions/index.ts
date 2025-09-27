@@ -7,65 +7,70 @@ import type { IGetSessionListDto, ISessionDto } from '@/domain/session/interface
 
 import { ESessionStatus } from '@/domain/common/sessions/enum'
 
-interface IMockSessions extends ISessionDto {
-  employeeId: string
-  kitId: string
-}
-
-const mockSessions: Array<IMockSessions> = [
+const mockSessions: Array<ISessionDto> = [
   {
     id: '1',
-    user: 'Иванов И.И.',
-    kit: 'Набор инструментов №1',
-    createdAt: new Date('2024-01-15T09:30:00'),
+    reciever_id: '1',
+    giver_id: '2',
+    location_id: '1',
+    kit_id: '1111',
     status: ESessionStatus.OPENED,
-    employeeId: 'emp001',
-    kitId: 'kit001',
+    opened_at: '2024-01-15T09:30:00Z',
+    given_image_url: 'https://example.com/images/given1.jpg',
+    created_at: '2024-01-15T09:00:00Z',
+    updated_at: '2024-01-15T09:30:00Z',
   },
   {
     id: '2',
-    user: 'Петров П.П.',
-    kit: 'Набор инструментов №2',
-    createdAt: new Date('2024-01-14T14:20:00'),
+    reciever_id: '2',
+    giver_id: '3',
+    location_id: '2',
+    kit_id: '1111',
     status: ESessionStatus.CLOSED,
-    employeeId: 'emp002',
-    kitId: 'kit002',
-  },
-  {
-    id: '3',
-    user: 'Сидоров С.С.',
-    kit: 'Набор инструментов №3',
-    createdAt: new Date('2024-01-16T11:45:00'),
-    status: ESessionStatus.PENDING,
-    employeeId: 'emp003',
-    kitId: 'kit003',
+    opened_at: '2024-01-14T14:20:00Z',
+    returned_at: '2024-01-14T18:00:00Z',
+    given_image_url: 'https://example.com/images/given2.jpg',
+    returned_image_url: 'https://example.com/images/returned2.jpg',
+    created_at: '2024-01-14T14:00:00Z',
+    updated_at: '2024-01-14T18:00:00Z',
   },
   {
     id: '4',
-    user: 'Козлов К.К.',
-    kit: 'Набор инструментов №1',
-    createdAt: new Date('2024-01-13T16:10:00'),
+    reciever_id: '4',
+    giver_id: '1',
+    location_id: '4',
+    kit_id: '1111',
     status: ESessionStatus.CLOSED,
-    employeeId: 'emp004',
-    kitId: 'kit001',
+    opened_at: '2024-01-13T16:10:00Z',
+    returned_at: '2024-01-13T20:30:00Z',
+    given_image_url: 'https://example.com/images/given4.jpg',
+    returned_image_url: 'https://example.com/images/returned4.jpg',
+    created_at: '2024-01-13T16:00:00Z',
+    updated_at: '2024-01-13T20:30:00Z',
   },
   {
     id: '5',
-    user: 'Морозов М.М.',
-    kit: 'Набор инструментов №4',
-    createdAt: new Date('2024-01-17T08:15:00'),
+    reciever_id: '1',
+    giver_id: '3',
+    location_id: '1',
+    kit_id: '1111',
     status: ESessionStatus.OPENED,
-    employeeId: 'emp005',
-    kitId: 'kit004',
+    opened_at: '2024-01-17T08:15:00Z',
+    given_image_url: 'https://example.com/images/given5.jpg',
+    created_at: '2024-01-17T08:00:00Z',
+    updated_at: '2024-01-17T08:15:00Z',
   },
   {
     id: '6',
-    user: 'Волков В.В.',
-    kit: 'Набор инструментов №2',
-    createdAt: new Date('2024-01-12T13:30:00'),
-    status: ESessionStatus.PENDING,
-    employeeId: 'emp006',
-    kitId: 'kit002',
+    reciever_id: '2',
+    giver_id: '4',
+    location_id: '2',
+    kit_id: '1111',
+    status: ESessionStatus.CLOSED,
+    opened_at: '2024-01-12T13:30:00Z',
+    given_image_url: 'https://example.com/images/given6.jpg',
+    created_at: '2024-01-12T13:00:00Z',
+    updated_at: '2024-01-12T13:30:00Z',
   },
 ]
 
@@ -79,16 +84,14 @@ const getSessionsList = async (port: IGetSessionsPort): Promise<IGetSessionListD
         filteredSessions = filteredSessions.filter((session) => session.status === port.status)
       }
       if (isNotNil(port.employeeId) && !isEmpty(port.employeeId)) {
-        filteredSessions = filteredSessions.filter((session) => session.employeeId === port.employeeId)
+        filteredSessions = filteredSessions.filter((session) => session.reciever_id === port.employeeId)
       }
 
-      if (isNotNil(port.kitId) && !isEmpty(port.kitId)) {
-        filteredSessions = filteredSessions.filter((session) => session.kitId === port.kitId)
+      if (isNotNil(port.locationId) && !isEmpty(port.locationId)) {
+        filteredSessions = filteredSessions.filter((session) => session.location_id === port.locationId)
       }
 
-      const result: IGetSessionListDto = filteredSessions.map(({ employeeId, kitId, ...session }) => session)
-
-      resolve(result)
+      resolve(filteredSessions)
     }, 500)
   })
 }

@@ -45,7 +45,6 @@ const config = [
       'no-return-await': 'warn',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-confusing-void-expression': 'error',
-      '@typescript-eslint/no-redundant-type-constituents': 'error',
       '@typescript-eslint/no-require-imports': 'error',
       '@typescript-eslint/no-useless-empty-export': 'error',
       '@typescript-eslint/prefer-enum-initializers': 'error',

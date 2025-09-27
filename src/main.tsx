@@ -11,6 +11,7 @@ import { RouterProvider } from '@tanstack/react-router'
 import { TanstackQueryProvider } from '@/app/common/providers/tanstack-query/provider'
 import { ROUTER } from '@/app/router/const'
 import { ThemeProvider } from '@/app/common/providers/theme/provider'
+import { CollectionsContextProvider } from '@/app/common/providers/collections/provider'
 
 setDefaultOptions({ locale: ru })
 
@@ -22,7 +23,9 @@ if (rootElement && !rootElement.innerHTML) {
     <StrictMode>
       <TanstackQueryProvider>
         <ThemeProvider>
-          <RouterProvider router={ROUTER} />
+          <CollectionsContextProvider>
+            <RouterProvider router={ROUTER} />
+          </CollectionsContextProvider>
         </ThemeProvider>
       </TanstackQueryProvider>
     </StrictMode>,

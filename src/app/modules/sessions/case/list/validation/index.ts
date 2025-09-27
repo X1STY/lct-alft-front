@@ -1,9 +1,9 @@
 import { z } from 'zod'
 
 const GetSessionsPortSchema = z.object({
-  status: z.number(),
+  status: z.string(),
   employeeId: z.string().optional(),
-  kitId: z.string().optional(),
+  locationId: z.string().optional(),
 })
 
 export { GetSessionsPortSchema }

@@ -12,7 +12,7 @@ import { useGetSessionListPresenter } from '@/app/modules/sessions/case/list/cas
 import { Tabs, TabsList, TabsTrigger } from '@/app/ui/components/tabs'
 import { DataTable } from '@/app/ui/components/data-table'
 import { useSessionsColumns } from '@/app/modules/sessions/case/list/table/columns'
-import { NewSessionDialog } from '@/app/common/components/new-session'
+import { NewSessionDialog } from '@/app/modules/sessions/case/create/component'
 import { EmployeesSelect } from '@/app/modules/collections/employees/component'
 import { LocationsSelect } from '@/app/modules/collections/locations/component'
 

@@ -2,7 +2,7 @@ import { isNotNil } from 'es-toolkit'
 
 import { isEmpty } from 'es-toolkit/compat'
 
-import type { IGetSessionsPort } from '@/domain/session/interface/port'
+import type { ICreateSessionPort, IGetSessionsPort } from '@/domain/session/interface/port'
 import type { IGetSessionListDto, ISessionDto } from '@/domain/session/interface/dto'
 
 import { ESessionStatus } from '@/domain/common/sessions/enum'
@@ -96,4 +96,13 @@ const getSessionsList = async (port: IGetSessionsPort): Promise<IGetSessionListD
   })
 }
 
-export { getSessionsList }
+const createSession = async (port: ICreateSessionPort) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(port)
+      console.log(port)
+    }, 1)
+  })
+}
+
+export { getSessionsList, createSession }

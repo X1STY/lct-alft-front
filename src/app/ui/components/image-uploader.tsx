@@ -48,12 +48,12 @@ export function ImageUploader({
 
   const validateFile = (file: File): boolean => {
     if (!acceptedTypes.includes(file.type)) {
-      setInternalError(`File type ${file.type} is not supported`)
+      setInternalError(`Тип файла ${file.type} не поддерживается`)
       return false
     }
 
     if (file.size > maxSize * 1024 * 1024) {
-      setInternalError(`File size must be less than ${maxSize}MB`)
+      setInternalError(`Размер файла не должен превышать ${maxSize}MB`)
       return false
     }
 
@@ -114,50 +114,29 @@ export function ImageUploader({
 
   return (
     <div className={cn('space-y-4', className)}>
-      <div
-        className={cn(
-          'relative cursor-pointer rounded-lg border-2 border-dashed p-6 transition-colors',
-          'hover:border-primary/50 hover:bg-accent/50',
-          isDragOver && 'border-primary bg-primary/5',
-          disabled && 'cursor-not-allowed opacity-50',
-          Boolean(displayError) && 'border-destructive',
-        )}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
-        onClick={openFileDialog}>
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept={acceptedTypes.join(',')}
-          onChange={handleInputChange}
-          className="hidden"
-          disabled={disabled}
-        />
-
-        <div className="flex flex-col items-center justify-center text-center">
-          <Upload className="text-muted-foreground mb-4 h-10 w-10" />
-          <p className="mb-2 text-sm font-medium">
-            {isDragOver ? 'Drop image here' : 'Click to upload or drag and drop'}
-          </p>
-          <p className="text-muted-foreground text-xs">
-            {acceptedTypes
-              .map((type) => type.split('/')[1])
-              .join(', ')
-              .toUpperCase()}{' '}
-            up to {maxSize}MB
-          </p>
-        </div>
-      </div>
-
-      {isNotNil(displayError) && (
-        <div className="text-destructive bg-destructive/10 rounded-md p-3 text-sm">{displayError}</div>
-      )}
-
-      {isNotNil(previewUrl) && (
-        <div className="group relative max-w-xs">
-          <div className="bg-muted aspect-square overflow-hidden rounded-lg border">
-            <img src={previewUrl} alt="Selected image" className="h-full w-full object-cover" />
+      {isNotNil(previewUrl) ? (
+        <div className="group relative">
+          <div
+            className={cn(
+              'relative min-h-[172px] cursor-pointer overflow-hidden rounded-lg border-2 border-dashed transition-colors',
+              'hover:border-primary/50 hover:bg-accent/50',
+              isDragOver && 'border-primary bg-primary/5',
+              disabled && 'cursor-not-allowed opacity-50',
+              Boolean(displayError) && 'border-destructive',
+            )}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            onClick={openFileDialog}>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept={acceptedTypes.join(',')}
+              onChange={handleInputChange}
+              className="hidden"
+              disabled={disabled}
+            />
+            <img src={previewUrl} alt="Selected image" className="h-[172px] w-full rounded-md object-cover" />
           </div>
           <Button
             variant="destructive"
@@ -170,6 +149,48 @@ export function ImageUploader({
             <X className="h-3 w-3" />
           </Button>
         </div>
+      ) : (
+        <div
+          className={cn(
+            'relative cursor-pointer rounded-lg border-2 border-dashed p-6 transition-colors',
+            'hover:border-primary/50 hover:bg-accent/50',
+            isDragOver && 'border-primary bg-primary/5',
+            disabled && 'cursor-not-allowed opacity-50',
+            Boolean(displayError) && 'border-destructive',
+          )}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          onClick={openFileDialog}>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept={acceptedTypes.join(',')}
+            onChange={handleInputChange}
+            className="hidden"
+            disabled={disabled}
+          />
+
+          <div className="flex flex-col items-center justify-center text-center">
+            <Upload className="text-muted-foreground mb-4 h-10 w-10" />
+            <p className="mb-2 text-sm font-medium">
+              {isDragOver
+                ? 'Отпустите изображение внутри окна'
+                : 'Нажмите для выбора изображения или переместите его в окно'}
+            </p>
+            <p className="text-muted-foreground text-xs">
+              {acceptedTypes
+                .map((type) => type.split('/')[1])
+                .join(', ')
+                .toUpperCase()}{' '}
+              до {maxSize}MB
+            </p>
+          </div>
+        </div>
+      )}
+
+      {isNotNil(displayError) && (
+        <div className="text-destructive bg-destructive/10 rounded-md p-3 text-sm">{displayError}</div>
       )}
     </div>
   )

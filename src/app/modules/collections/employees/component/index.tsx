@@ -4,8 +4,14 @@ import type { IEmployeeSelectProps } from '@/app/modules/collections/employees/i
 
 import { useCollectionsContext } from '@/app/common/providers/collections/context'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/ui/components/select'
+import { cn } from '@/app/utils/cn'
 
-const EmployeesSelect: FC<IEmployeeSelectProps> = ({ onChange, value = 'all', isRenderClearOption = true }) => {
+const EmployeesSelect: FC<IEmployeeSelectProps> = ({
+  onChange,
+  value = 'all',
+  isRenderClearOption = true,
+  className = '',
+}) => {
   const { employeesCollection } = useCollectionsContext()
 
   return (
@@ -15,7 +21,7 @@ const EmployeesSelect: FC<IEmployeeSelectProps> = ({ onChange, value = 'all', is
         const newValue = selectedValue === 'all' ? '' : selectedValue
         onChange?.(newValue)
       }}>
-      <SelectTrigger className="bg-background w-[250px]">
+      <SelectTrigger className={cn('bg-background w-[250px]', className)}>
         <SelectValue placeholder="Выберете сотрудника" />
       </SelectTrigger>
       <SelectContent>

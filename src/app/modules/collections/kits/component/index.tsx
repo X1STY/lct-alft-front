@@ -4,8 +4,9 @@ import type { IKitsSelectProps } from '@/app/modules/collections/kits/interface'
 
 import { useCollectionsContext } from '@/app/common/providers/collections/context'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/ui/components/select'
+import { cn } from '@/app/utils/cn'
 
-const KitsSelect: FC<IKitsSelectProps> = ({ onChange, value = 'all', isRenderClearOption = true }) => {
+const KitsSelect: FC<IKitsSelectProps> = ({ onChange, value = 'all', isRenderClearOption = true, className = '' }) => {
   const { kitCollection } = useCollectionsContext()
 
   return (
@@ -15,11 +16,11 @@ const KitsSelect: FC<IKitsSelectProps> = ({ onChange, value = 'all', isRenderCle
         const newValue = selectedValue === 'all' ? '' : selectedValue
         onChange?.(newValue)
       }}>
-      <SelectTrigger className="bg-background w-[250px]">
+      <SelectTrigger className={cn('bg-background w-[250px]', className)}>
         <SelectValue placeholder="Выберете набор" />
       </SelectTrigger>
       <SelectContent>
-        {Boolean(isRenderClearOption) && <SelectItem value="all">Все сотрудники</SelectItem>}
+        {Boolean(isRenderClearOption) && <SelectItem value="all">Все наборы</SelectItem>}
         {kitCollection.map((kit) => (
           <SelectItem key={kit.id} value={kit.id}>
             {kit.name}

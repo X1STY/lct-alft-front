@@ -58,7 +58,7 @@ const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
       },
       {
         accessorKey: 'location_id',
-        header: 'Локация',
+        header: 'Станция',
         cell: (cell) => {
           const locationId = cell.getValue<string>()
           const locationName = findLocationName(locationId)

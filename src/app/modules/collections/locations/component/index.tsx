@@ -4,8 +4,14 @@ import type { ILocationsSelectProps } from '@/app/modules/collections/locations/
 
 import { useCollectionsContext } from '@/app/common/providers/collections/context'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/ui/components/select'
+import { cn } from '@/app/utils/cn'
 
-const LocationsSelect: FC<ILocationsSelectProps> = ({ onChange, value = 'all', isRenderClearOption = true }) => {
+const LocationsSelect: FC<ILocationsSelectProps> = ({
+  onChange,
+  value = 'all',
+  isRenderClearOption = true,
+  className = '',
+}) => {
   const { locationCollection } = useCollectionsContext()
 
   return (
@@ -15,11 +21,11 @@ const LocationsSelect: FC<ILocationsSelectProps> = ({ onChange, value = 'all', i
         const newValue = selectedValue === 'all' ? '' : selectedValue
         onChange?.(newValue)
       }}>
-      <SelectTrigger className="bg-background w-[250px]">
+      <SelectTrigger className={cn('bg-background w-[250px]', className)}>
         <SelectValue placeholder="Выберете станцию" />
       </SelectTrigger>
       <SelectContent>
-        {Boolean(isRenderClearOption) && <SelectItem value="all">Все сотрудники</SelectItem>}
+        {Boolean(isRenderClearOption) && <SelectItem value="all">Все станции</SelectItem>}
         {locationCollection.map((location) => (
           <SelectItem key={location.id} value={location.id}>
             {location.name}

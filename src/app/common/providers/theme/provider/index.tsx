@@ -33,11 +33,19 @@ function ThemeProvider({
     if (isNotNil(document.startViewTransition)) {
       await document.startViewTransition(() => {
         flushSync(() => {
-          setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
+          setTheme((prevTheme) => {
+            const newTheme = prevTheme === 'light' ? 'dark' : 'light'
+            localStorage.setItem(storageKey, newTheme)
+            return newTheme
+          })
         })
       }).ready
     } else {
-      setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
+      setTheme((prevTheme) => {
+        const newTheme = prevTheme === 'light' ? 'dark' : 'light'
+        localStorage.setItem(storageKey, newTheme)
+        return newTheme
+      })
     }
   }
   const value = {

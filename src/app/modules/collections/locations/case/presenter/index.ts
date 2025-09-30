@@ -3,7 +3,7 @@ import { useGetLocationCollectionRequest } from '@/app/modules/collections/locat
 const useGetLocationCollectionPresenter = () => {
   const { data } = useGetLocationCollectionRequest()
 
-  const collection = data ?? []
+  const collection = data?.items ?? []
 
   return { collection }
 }

@@ -15,8 +15,9 @@ const useCreateSessionPresenter = () => {
     resolver: zodResolver(CreateSessionSchema),
     defaultValues: {
       image: undefined,
-      kit: '',
-      reciever: '',
+      kit_id: undefined,
+      receiver_id: undefined,
+      location_id: undefined,
     },
   })
 

@@ -1,18 +1,9 @@
 import type { ILocationCollectionDto } from '@/domain/locations/interface/dto'
 
-const getLocationsCollection = async (): Promise<ILocationCollectionDto> => {
-  const mockLocations: ILocationCollectionDto = [
-    { id: '1', name: 'VKO' },
-    { id: '2', name: 'DME' },
-    { id: '3', name: 'SVO' },
-    { id: '4', name: 'LED' },
-  ]
+import { api } from '@/app/common/providers/http/service'
 
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(mockLocations)
-    }, 500)
-  })
+const getLocationsCollection = async (): Promise<ILocationCollectionDto> => {
+  return api.get<ILocationCollectionDto>('/location/')
 }
 
 export { getLocationsCollection }

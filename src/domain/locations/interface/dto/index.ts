@@ -1,8 +1,10 @@
+import type { IBaseResponse } from '@/domain/common/http/interface'
+
 interface ILocationDto {
-  id: string
+  id: number
   name: string
 }
 
-type ILocationCollectionDto = Array<ILocationDto>
+type ILocationCollectionDto = IBaseResponse<Array<ILocationDto>>
 
 export type { ILocationDto, ILocationCollectionDto }

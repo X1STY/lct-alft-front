@@ -2,7 +2,7 @@ FROM node:20-alpine as build-stage
 
 WORKDIR /app
 
-ARG VITE_API_HOST=
+ARG VITE_API_HOST=https://api.sharpmindteam.ru
 
 COPY package*.json /app/
 RUN npm install

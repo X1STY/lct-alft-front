@@ -1,6 +1,8 @@
 import { useMemo } from 'react'
 import { format } from 'date-fns'
 
+import { isDate } from 'es-toolkit'
+
 import type { ColumnDef } from '@tanstack/react-table'
 
 import type { ISessionDto } from '@/domain/session/interface/dto'
@@ -14,17 +16,17 @@ import { useCollectionsContext } from '@/app/common/providers/collections/contex
 const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
   const { employeesCollection, kitCollection, locationCollection } = useCollectionsContext()
 
-  const findEmployeeName = (id: string): string => {
+  const findEmployeeName = (id: number): string => {
     const employee = employeesCollection.find((emp) => emp.id === id)
     return employee?.name ?? ''
   }
 
-  const findKitName = (id: string): string => {
+  const findKitName = (id: number): string => {
     const kit = kitCollection.find((kit) => kit.id === id)
     return kit?.name ?? ''
   }
 
-  const findLocationName = (id: string): string => {
+  const findLocationName = (id: number): string => {
     const location = locationCollection.find((loc) => loc.id === id)
     return location?.name ?? ''
   }
@@ -37,10 +39,10 @@ const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
         cell: (cell) => <div className="text-muted-foreground font-mono text-sm">{cell.getValue<string>()}</div>,
       },
       {
-        accessorKey: 'reciever_id',
+        accessorKey: 'receiver_id',
         header: 'Получатель',
         cell: (cell) => {
-          const receiverId = cell.getValue<string>()
+          const receiverId = cell.getValue<number>()
           const employeeName = findEmployeeName(receiverId)
           return <div className="font-medium">{employeeName}</div>
         },
@@ -49,7 +51,7 @@ const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
         accessorKey: 'kit_id',
         header: 'Набор',
         cell: (cell) => {
-          const kitId = cell.getValue<string>()
+          const kitId = cell.getValue<number>()
           const kitName = findKitName(kitId)
           return <div>{kitName}</div>
         },
@@ -58,7 +60,7 @@ const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
         accessorKey: 'location_id',
         header: 'Станция',
         cell: (cell) => {
-          const locationId = cell.getValue<string>()
+          const locationId = cell.getValue<number>()
           const locationName = findLocationName(locationId)
           return <div>{locationName}</div>
         },
@@ -68,7 +70,10 @@ const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
         header: 'Время открытия',
         cell: (cell) => {
           const date = cell.getValue<Date>()
-          return <div className="text-sm">{format(date, 'd MMMM, HH:mm')}</div>
+          if (!isDate(date)) {
+            return <div className="text-sm">{format(date, 'd MMMM, HH:mm')}</div>
+          }
+          return '-'
         },
       },
       {

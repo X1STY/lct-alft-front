@@ -13,7 +13,7 @@ import { useCollectionsContext } from '@/app/common/providers/collections/contex
 const SessionHeader: FC<ISessionHeaderProps> = ({ session }) => {
   const { employeesCollection, kitCollection } = useCollectionsContext()
 
-  const reciever = employeesCollection.find((item) => item.id === session.reciever_id)
+  const receiver = employeesCollection.find((item) => item.id === session.receiver_id)
   const kit = kitCollection.find((item) => item.id === session.kit_id)
 
   return (
@@ -23,7 +23,7 @@ const SessionHeader: FC<ISessionHeaderProps> = ({ session }) => {
         <div className="flex flex-row items-center gap-8">
           <div className="flex flex-col gap-1">
             <span className="text-sm text-neutral-500">Получатель</span>
-            <div className="">{reciever?.name}</div>
+            <div className="">{receiver?.name}</div>
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-sm text-neutral-500">Набор</span>

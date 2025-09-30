@@ -1,11 +1,11 @@
 import type { ESessionStatus } from '@/domain/common/sessions/enum'
 
 interface ISessionDto {
-  id: string
-  reciever_id: string
-  giver_id: string
-  location_id: string
-  kit_id: string
+  id: number
+  receiver_id: number
+  giver_id: number
+  location_id: number
+  kit_id: number
   status: ESessionStatus
   opened_at?: string
   returned_at?: string

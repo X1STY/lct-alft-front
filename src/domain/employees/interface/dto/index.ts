@@ -1,8 +1,10 @@
+import type { IBaseResponse } from '@/domain/common/http/interface'
+
 interface IEmployeeDto {
-  id: string
+  id: number
   name: string
 }
 
-type IEmployeeCollectionDto = Array<IEmployeeDto>
+type IEmployeeCollectionDto = IBaseResponse<Array<IEmployeeDto>>
 
 export type { IEmployeeDto, IEmployeeCollectionDto }

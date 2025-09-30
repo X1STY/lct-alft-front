@@ -13,6 +13,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { EmployeesSelect } from '@/app/modules/collections/employees/component'
 import { KitsSelect } from '@/app/modules/collections/kits/component'
 import { ImageUploader } from '@/app/ui/components/image-uploader'
+import { LocationsSelect } from '@/app/modules/collections/locations/component'
 
 export const NewSessionDialog = () => {
   const {
@@ -34,7 +35,7 @@ export const NewSessionDialog = () => {
             <div className="grid gap-5">
               <FormField
                 control={form.control}
-                name="reciever"
+                name="receiver_id"
                 render={({ field }) => {
                   return (
                     <FormItem>
@@ -54,13 +55,33 @@ export const NewSessionDialog = () => {
               />
               <FormField
                 control={form.control}
-                name="kit"
+                name="kit_id"
                 render={({ field }) => {
                   return (
                     <FormItem>
                       <FormLabel>Набор</FormLabel>
                       <FormControl>
                         <KitsSelect
+                          isRenderClearOption={false}
+                          className="!w-full"
+                          onChange={field.onChange}
+                          value={field.value}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )
+                }}
+              />
+              <FormField
+                control={form.control}
+                name="location_id"
+                render={({ field }) => {
+                  return (
+                    <FormItem>
+                      <FormLabel>Локация</FormLabel>
+                      <FormControl>
+                        <LocationsSelect
                           isRenderClearOption={false}
                           className="!w-full"
                           onChange={field.onChange}

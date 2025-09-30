@@ -3,7 +3,7 @@ import { useGetEmployeeCollectionRequest } from '@/app/modules/collections/emplo
 const useGetEmployeeCollectionPresenter = () => {
   const { data } = useGetEmployeeCollectionRequest()
 
-  const collection = data ?? []
+  const collection = data?.items ?? []
 
   return { collection }
 }

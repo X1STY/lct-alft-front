@@ -1,18 +1,9 @@
 import type { IEmployeeCollectionDto } from '@/domain/employees/interface/dto'
 
-const getEmployeesCollection = async (): Promise<IEmployeeCollectionDto> => {
-  const mockEmployees: IEmployeeCollectionDto = [
-    { id: '1', name: 'Иванов И. И' },
-    { id: '2', name: 'Киров К. К' },
-    { id: '3', name: 'Летаев Л. Д.' },
-    { id: '4', name: 'Воронов К. Т.' },
-  ]
+import { api } from '@/app/common/providers/http/service'
 
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(mockEmployees)
-    }, 500)
-  })
+const getEmployeesCollection = async (): Promise<IEmployeeCollectionDto> => {
+  return api.get<IEmployeeCollectionDto>('/employee/')
 }
 
 export { getEmployeesCollection }

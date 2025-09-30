@@ -6,7 +6,9 @@ import { getSessionsList } from '@/data/repository/sessions'
 import { EQueryKeys } from '@/domain/common/query/enum'
 
 const useGetSessionListRequest = (port: IGetSessionsPort) => {
-  const callback = () => getSessionsList(port)
+  const callback = () => {
+    return getSessionsList({ ...port, status: port.status.toLowerCase() })
+  }
 
   return useQuery({
     queryFn: callback,

@@ -3,7 +3,7 @@ import { useGetKitCollectionRequest } from '@/app/modules/collections/kits/case/
 const useGetKitCollectionPresenter = () => {
   const { data } = useGetKitCollectionRequest()
 
-  const collection = data ?? []
+  const collection = data?.items ?? []
 
   return { collection }
 }

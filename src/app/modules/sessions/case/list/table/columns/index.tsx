@@ -22,7 +22,7 @@ const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
   }
 
   const findKitName = (id: number): string => {
-    const kit = kitCollection.find((kit) => kit.id === id)
+    const kit = kitCollection.find((kitItem) => kitItem.id === id)
     return kit?.name ?? ''
   }
 

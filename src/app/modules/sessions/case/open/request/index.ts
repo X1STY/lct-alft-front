@@ -12,6 +12,7 @@ const useOpenSessionRequest = () => {
   const handleOnSuccess = async () => {
     await validateQuery.invalidateQueries({
       queryKey: [EQueryKeys.GET_SESSION_LIST],
+      type: 'all',
     })
     await validateQuery.invalidateQueries({
       queryKey: [EQueryKeys.GET_SESSION],

@@ -26,8 +26,8 @@ interface ISessionDetailDto {
   location_id: string
   kit_id: string
   status: ESessionStatus
-  given_image_url?: string | null
-  returned_image_url?: string | null
+  given_image_url?: string
+  returned_image_url?: string
   tools: Array<ISessionToolDto>
   created_at: string
   updated_at: string

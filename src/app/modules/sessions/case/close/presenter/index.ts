@@ -4,7 +4,7 @@ import { useCloseSessionRequest } from '@/app/modules/sessions/case/close/reques
 import { SESSION_PAGE_ROUTE } from '@/app/modules/sessions/route'
 
 const useCloseSessionPresenter = () => {
-  const { mutateAsync } = useCloseSessionRequest()
+  const { mutateAsync, isPending } = useCloseSessionRequest()
   const { id } = useParams({ from: SESSION_PAGE_ROUTE.id })
 
   const handleCloseSession = async () => {
@@ -13,6 +13,7 @@ const useCloseSessionPresenter = () => {
 
   return {
     handleCloseSession,
+    isPending,
   }
 }
 

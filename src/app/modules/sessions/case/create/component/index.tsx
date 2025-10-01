@@ -1,3 +1,5 @@
+import { Loader2Icon } from 'lucide-react'
+
 import { Button } from '@/app/ui/components/button'
 import {
   Dialog,
@@ -20,6 +22,7 @@ export const NewSessionDialog = () => {
     form,
     handleSubmit,
     modalProps: { isOpen, toggleOpen },
+    isPending,
   } = useCreateSessionPresenter()
   return (
     <Dialog open={isOpen} onOpenChange={toggleOpen}>
@@ -113,7 +116,8 @@ export const NewSessionDialog = () => {
               <DialogClose asChild>
                 <Button variant="outline">Отмена</Button>
               </DialogClose>
-              <Button type="submit" form="new-session-form">
+              <Button type="submit" form="new-session-form" disabled={isPending}>
+                {isPending && <Loader2Icon className="animate-spin" />}
                 Отправить на анализ
               </Button>
             </DialogFooter>

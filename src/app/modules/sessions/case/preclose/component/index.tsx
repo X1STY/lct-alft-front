@@ -1,3 +1,5 @@
+import { Loader2Icon } from 'lucide-react'
+
 import { Button } from '@/app/ui/components/button'
 import {
   Dialog,
@@ -17,6 +19,7 @@ export const PreCloseSessionDialog = () => {
     form,
     handleSubmit,
     modalProps: { isOpen, toggleOpen },
+    isPending,
   } = usePreCloseSessionPresenter()
   return (
     <Dialog open={isOpen} onOpenChange={toggleOpen}>
@@ -50,7 +53,8 @@ export const PreCloseSessionDialog = () => {
               <DialogClose asChild>
                 <Button variant="outline">Отмена</Button>
               </DialogClose>
-              <Button type="submit" form="new-session-form">
+              <Button type="submit" disabled={isPending} form="new-session-form">
+                {isPending && <Loader2Icon className="animate-spin" />}
                 Отправить на анализ
               </Button>
             </DialogFooter>

@@ -3,6 +3,8 @@ import { createLazyRoute } from '@tanstack/react-router'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import { Loader2Icon } from 'lucide-react'
+
 import type { IGetSessionsPort } from '@/domain/session/interface/port'
 
 import { GetSessionsPortSchema } from '@/app/modules/sessions/case/list/validation'
@@ -19,14 +21,14 @@ import { LocationsSelect } from '@/app/modules/collections/locations/component'
 const SessionsListPage = () => {
   const filters = useForm<IGetSessionsPort>({
     resolver: zodResolver(GetSessionsPortSchema),
-    defaultValues: { status: ESessionStatus.OPENED },
+    defaultValues: { recieverId: '', locationId: '', status: ESessionStatus.OPENED },
   })
 
   const status = useWatch({ control: filters.control, name: 'status' })
   const locationId = useWatch({ control: filters.control, name: 'locationId' })
   const recieverId = useWatch({ control: filters.control, name: 'recieverId' })
 
-  const { data, isLoading } = useGetSessionListPresenter({ status, locationId, recieverId })
+  const { data, isPending } = useGetSessionListPresenter({ status, locationId, recieverId })
   const sessionsColumns = useSessionsColumns()
   return (
     <div className="flex w-full flex-col gap-6">
@@ -64,7 +66,13 @@ const SessionsListPage = () => {
         </div>
       </section>
       <section>
-        <DataTable columns={sessionsColumns} isLoading={isLoading} data={data?.items ?? []} />
+        {isPending ? (
+          <div className="size-full">
+            <Loader2Icon className="m-auto h-10 w-10 animate-spin" />
+          </div>
+        ) : (
+          <DataTable columns={sessionsColumns} isLoading={isPending} data={data?.items ?? []} />
+        )}
       </section>
     </div>
   )

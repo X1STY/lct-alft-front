@@ -41,8 +41,8 @@ const preCloseSession = async ({ id, ...port }: IPreCloseSessionPort): Promise<I
   return api.postForm(`/session/${id}/preclose`, port)
 }
 
-const closeSession = ({ id }: ICloseSessionPort): ISessionDto => {
-  return api.post(`/session/${id}/close/`)
+const closeSession = async ({ id }: ICloseSessionPort): Promise<ISessionDto> => {
+  return api.post(`/session/${id}/close`)
 }
 
 export { getSessionsList, getOneSession, createSession, openSession, closeSession, preCloseSession }

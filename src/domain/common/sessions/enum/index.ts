@@ -2,7 +2,7 @@ enum ESessionStatus {
   OPEN_WAITING_FOR_APPROVAL = 'open_waiting_for_aproval',
   OPEN_APPROVED = 'open_approved',
   OPENED = 'opened',
-  CLOSE_WAITING_FOR_APPROVAL = 'close_waiting_for_approval',
+  CLOSE_WAITING_FOR_APPROVAL = 'close_waiting_for_aproval',
   CLOSE_APPROVED = 'close_approved',
   CLOSED = 'closed',
 }

@@ -27,7 +27,7 @@ export const PreCloseSessionDialog = () => {
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>Анализ инструментов</DialogTitle>
+              <DialogTitle>Сдать набор инструментов</DialogTitle>
             </DialogHeader>
             <div className="grid gap-5">
               <FormField

@@ -1,25 +1,23 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { useRouter } from '@tanstack/react-router'
-
 import type { ISessionDto } from '@/domain/session/interface/dto'
 
-import type { ICreateSessionPort } from '@/domain/session/interface/port'
+import type { IOpenSessionPort } from '@/domain/session/interface/port'
 
-import { createSession } from '@/data/repository/sessions'
+import { openSession } from '@/data/repository/sessions'
 import { EQueryKeys } from '@/domain/common/query/enum'
 
-const useCreateSessionRequest = () => {
-  const router = useRouter()
+const useOpenSessionRequest = () => {
   const validateQuery = useQueryClient()
-
-  const callback = (port: ICreateSessionPort) => createSession(port)
+  const callback = (port: IOpenSessionPort) => openSession(port)
 
   const handleOnSuccess = async (data: ISessionDto) => {
     await validateQuery.invalidateQueries({
       queryKey: [EQueryKeys.GET_SESSION_LIST],
     })
-    router.navigate({ to: '/session/$id', params: { id: data.id } })
+    await validateQuery.invalidateQueries({
+      queryKey: [EQueryKeys.GET_SESSION, { id: data.id }],
+    })
   }
 
   return useMutation({
@@ -28,4 +26,4 @@ const useCreateSessionRequest = () => {
   })
 }
 
-export { useCreateSessionRequest }
+export { useOpenSessionRequest }

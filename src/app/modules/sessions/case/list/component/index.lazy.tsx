@@ -19,15 +19,14 @@ import { LocationsSelect } from '@/app/modules/collections/locations/component'
 const SessionsListPage = () => {
   const filters = useForm<IGetSessionsPort>({
     resolver: zodResolver(GetSessionsPortSchema),
-    defaultValues: { employeeId: undefined, locationId: undefined, status: ESessionStatus.OPENED },
+    defaultValues: { status: ESessionStatus.OPENED },
   })
 
   const status = useWatch({ control: filters.control, name: 'status' })
   const locationId = useWatch({ control: filters.control, name: 'locationId' })
-  const employeeId = useWatch({ control: filters.control, name: 'employeeId' })
+  const recieverId = useWatch({ control: filters.control, name: 'recieverId' })
 
-  const { data, isLoading } = useGetSessionListPresenter({ status, locationId, employeeId })
-
+  const { data, isLoading } = useGetSessionListPresenter({ status, locationId, recieverId })
   const sessionsColumns = useSessionsColumns()
   return (
     <div className="flex w-full flex-col gap-6">
@@ -50,9 +49,9 @@ const SessionsListPage = () => {
 
           <div className="flex flex-row items-center gap-4">
             <EmployeesSelect
-              value={employeeId}
+              value={recieverId}
               onChange={(value) => {
-                filters.setValue('employeeId', value)
+                filters.setValue('recieverId', value)
               }}
             />
             <LocationsSelect
@@ -65,7 +64,7 @@ const SessionsListPage = () => {
         </div>
       </section>
       <section>
-        <DataTable columns={sessionsColumns} isLoading={isLoading} data={data ?? []} />
+        <DataTable columns={sessionsColumns} isLoading={isLoading} data={data?.items ?? []} />
       </section>
     </div>
   )

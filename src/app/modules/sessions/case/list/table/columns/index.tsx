@@ -3,6 +3,8 @@ import { format } from 'date-fns'
 
 import { isDate } from 'es-toolkit'
 
+import { useNavigate } from '@tanstack/react-router'
+
 import type { ColumnDef } from '@tanstack/react-table'
 
 import type { ISessionDto } from '@/domain/session/interface/dto'
@@ -12,9 +14,11 @@ import { SessionStatusName } from '@/domain/common/sessions/enum'
 import { Badge } from '@/app/ui/components/badge'
 import { Button } from '@/app/ui/components/button'
 import { useCollectionsContext } from '@/app/common/providers/collections/context'
+import { SESSION_PAGE_ROUTE } from '@/app/modules/sessions/route'
 
 const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
   const { employeesCollection, kitCollection, locationCollection } = useCollectionsContext()
+  const navigate = useNavigate()
 
   const findEmployeeName = (id: string): string => {
     const employee = employeesCollection.find((emp) => emp.id === id)
@@ -39,11 +43,11 @@ const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
         cell: (cell) => <div className="text-muted-foreground font-mono text-sm">{cell.getValue<string>()}</div>,
       },
       {
-        accessorKey: 'receiver_id',
+        accessorKey: 'reciever_id',
         header: 'Получатель',
         cell: (cell) => {
-          const receiverId = cell.getValue<string>()
-          const employeeName = findEmployeeName(receiverId)
+          const recieverId = cell.getValue<string>()
+          const employeeName = findEmployeeName(recieverId)
           return <div className="font-medium">{employeeName}</div>
         },
       },
@@ -66,8 +70,8 @@ const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
         },
       },
       {
-        accessorKey: 'opened_at',
-        header: 'Время открытия',
+        accessorKey: 'created_at',
+        header: 'Время создания',
         cell: (cell) => {
           const date = cell.getValue<Date>()
           if (!isDate(date)) {
@@ -89,8 +93,13 @@ const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
       {
         id: 'actions',
         header: '',
-        cell: () => (
-          <Button variant="ghost" size="sm">
+        cell: (cell) => (
+          <Button
+            onClick={async () => {
+              await navigate({ to: SESSION_PAGE_ROUTE.to, params: { id: cell.row.original.id } })
+            }}
+            variant="ghost"
+            size="sm">
             Детали сессии
           </Button>
         ),

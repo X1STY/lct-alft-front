@@ -1,7 +1,7 @@
-import type { ISessionDto } from '@/domain/session/interface/dto'
+import type { ISessionDetailDto } from '@/domain/session/interface/dto'
 
 interface ISessionHeaderProps {
-  session: ISessionDto
+  session: ISessionDetailDto
 }
 
 export type { ISessionHeaderProps }

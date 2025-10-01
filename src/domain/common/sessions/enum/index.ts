@@ -4,7 +4,7 @@ enum ESessionStatus {
   OPENED = 'opened',
   CLOSE_WAITING_FOR_APPROVAL = 'close_waiting_for_approval',
   CLOSE_APPROVED = 'close_approved',
-  CLOSED = 'close',
+  CLOSED = 'closed',
 }
 
 const SessionStatusName = {

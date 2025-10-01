@@ -16,7 +16,7 @@ const useOpenSessionRequest = () => {
       queryKey: [EQueryKeys.GET_SESSION_LIST],
     })
     await validateQuery.invalidateQueries({
-      queryKey: [EQueryKeys.GET_SESSION, { id: data.id }],
+      queryKey: [EQueryKeys.GET_SESSION, data.id],
     })
   }
 

@@ -13,7 +13,7 @@ import { useCollectionsContext } from '@/app/common/providers/collections/contex
 const SessionHeader: FC<ISessionHeaderProps> = ({ session }) => {
   const { employeesCollection, kitCollection, locationCollection } = useCollectionsContext()
 
-  const receiver = employeesCollection.find((item) => item.id === session.receiver_id)
+  const reciever = employeesCollection.find((item) => item.id === session.reciever_id)
   const kit = kitCollection.find((item) => item.id === session.kit_id)
   const location = locationCollection.find((item) => item.id === session.location_id)
 
@@ -24,7 +24,7 @@ const SessionHeader: FC<ISessionHeaderProps> = ({ session }) => {
         <div className="flex flex-row items-center gap-8">
           <div className="flex flex-col gap-1">
             <span className="text-sm text-neutral-500">Получатель</span>
-            <div className="">{receiver?.name ?? 'Тестовый получатель'}</div>
+            <div className="">{reciever?.name}</div>
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-sm text-neutral-500">Набор</span>
@@ -34,10 +34,10 @@ const SessionHeader: FC<ISessionHeaderProps> = ({ session }) => {
             <span className="text-sm text-neutral-500">Станция</span>
             <div className="">{location?.name}</div>
           </div>
-          {isNotNil(session.opened_at) && (
+          {isNotNil(session.created_at) && (
             <div className="flex flex-col gap-1">
-              <span className="text-sm text-neutral-500">Дата открытия</span>
-              <div className="">{format(session.opened_at, 'd MMMM, HH:mm')}</div>
+              <span className="text-sm text-neutral-500">Дата создания</span>
+              <div className="">{format(session.created_at, 'd MMMM, HH:mm')}</div>
             </div>
           )}
         </div>

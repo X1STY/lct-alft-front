@@ -1,20 +1,38 @@
 import type { ESessionStatus } from '@/domain/common/sessions/enum'
 
+import type { IBaseResponse } from '@/domain/common/http/interface'
+
 interface ISessionDto {
   id: string
-  receiver_id: string
-  giver_id: string
+  reciever_id: string
   location_id: string
   kit_id: string
   status: ESessionStatus
-  opened_at?: string
-  returned_at?: string
-  given_image_url?: string
-  returned_image_url?: string
   created_at: string
   updated_at: string
 }
 
-type IGetSessionListDto = Array<ISessionDto>
+interface ISessionToolDto {
+  tool_name: string
+  quantity_given: number
+  quantity_returned: number
+  quantity_required: number
+}
 
-export type { ISessionDto, IGetSessionListDto }
+interface ISessionDetailDto {
+  id: string
+  reciever_id: string
+  giver_id: string
+  location_id: string
+  kit_id: string
+  status: ESessionStatus
+  given_image_url?: string | null
+  returned_image_url?: string | null
+  tools: Array<ISessionToolDto>
+  created_at: string
+  updated_at: string
+}
+
+type IGetSessionListDto = IBaseResponse<Array<ISessionDto>>
+
+export type { ISessionDto, IGetSessionListDto, ISessionDetailDto, ISessionToolDto }

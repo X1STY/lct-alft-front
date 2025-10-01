@@ -21,10 +21,10 @@ const Header: FC = () => {
         <Breadcrumbs />
       </div>
       <nav className="flex flex-row gap-6">
-        <Link className="hover:underline" to={SESSION_LIST_PAGE_ROUTE.to}>
+        <Link className="hover:underline" to={SESSION_LIST_PAGE_ROUTE.to} replace>
           Эмулятор ТОиР
         </Link>
-        <Link className="hover:underline" to={TEST_MANY_IMAGES_ROUTE.to}>
+        <Link className="hover:underline" to={TEST_MANY_IMAGES_ROUTE.to} replace>
           Тест модели
         </Link>
       </nav>

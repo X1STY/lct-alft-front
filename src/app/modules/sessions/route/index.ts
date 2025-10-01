@@ -13,4 +13,14 @@ const SESSION_LIST_PAGE_ROUTE = createRoute({
   },
 }).lazy(async () => import('../case/list/component/index.lazy').then((d) => d.SessionsListPageRoute))
 
-export { SESSION_LIST_PAGE_ROUTE }
+const SESSION_PAGE_ROUTE = createRoute({
+  path: ERouterPath.SESSION,
+  getParentRoute: () => MODULE_PAGE_ROUTE,
+  loader: () => {
+    return {
+      crumb: 'Просмотр информации о сессии',
+    }
+  },
+}).lazy(async () => import('../case/get-one/component/index.lazy').then((d) => d.SessionPageRoute))
+
+export { SESSION_LIST_PAGE_ROUTE, SESSION_PAGE_ROUTE }

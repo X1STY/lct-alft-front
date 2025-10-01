@@ -8,6 +8,7 @@ import type { ICreateSessionPort } from '@/domain/session/interface/port'
 
 import { createSession } from '@/data/repository/sessions'
 import { EQueryKeys } from '@/domain/common/query/enum'
+import { SESSION_PAGE_ROUTE } from '@/app/modules/sessions/route'
 
 const useCreateSessionRequest = () => {
   const router = useRouter()
@@ -19,7 +20,7 @@ const useCreateSessionRequest = () => {
     await validateQuery.invalidateQueries({
       queryKey: [EQueryKeys.GET_SESSION_LIST],
     })
-    router.navigate({ to: '/session/$id', params: { id: data.id } })
+    router.navigate({ to: SESSION_PAGE_ROUTE.to, params: { id: data.id } })
   }
 
   return useMutation({

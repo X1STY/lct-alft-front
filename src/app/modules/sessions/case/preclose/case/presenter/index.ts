@@ -9,10 +9,11 @@ import type { IPreCloseSessionPort } from '@/domain/session/interface/port'
 import { useModal } from '@/app/utils/hook/use-modal/core'
 import { PreCloseSessionSchema } from '@/app/modules/sessions/case/preclose/validation'
 import { usePreCloseSessionRequest } from '@/app/modules/sessions/case/preclose/case/request'
+import { SESSION_PAGE_ROUTE } from '@/app/modules/sessions/route'
 
 const usePreCloseSessionPresenter = () => {
   const { isOpen, toggleOpen, handleOnClose } = useModal()
-  const { id } = useParams({ from: '/session/$id' })
+  const { id } = useParams({ from: SESSION_PAGE_ROUTE.id })
   const form = useForm<IPreCloseSessionPort>({
     resolver: zodResolver(PreCloseSessionSchema),
     defaultValues: {

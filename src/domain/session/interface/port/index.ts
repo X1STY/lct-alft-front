@@ -8,6 +8,10 @@ import type { CreateSessionSchema } from '@/app/modules/sessions/case/create/val
 
 import type { PreCloseSessionSchema } from '@/app/modules/sessions/case/preclose/validation'
 
+interface IGetSessionPort {
+  id: string
+}
+
 type IGetSessionsPort = z.infer<typeof GetSessionsPortSchema>
 
 type ICreateSessionPort = z.infer<typeof CreateSessionSchema>
@@ -18,4 +22,11 @@ type IPreCloseSessionPort = z.infer<typeof PreCloseSessionSchema>
 
 type ICloseSessionPort = Pick<ISessionDto, 'id'>
 
-export type { IGetSessionsPort, ICreateSessionPort, IOpenSessionPort, ICloseSessionPort, IPreCloseSessionPort }
+export type {
+  IGetSessionPort,
+  IGetSessionsPort,
+  ICreateSessionPort,
+  IOpenSessionPort,
+  ICloseSessionPort,
+  IPreCloseSessionPort,
+}

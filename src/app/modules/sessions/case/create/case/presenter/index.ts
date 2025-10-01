@@ -16,7 +16,7 @@ const useCreateSessionPresenter = () => {
     defaultValues: {
       image: undefined,
       kit_id: undefined,
-      receiver_id: undefined,
+      reciever_id: undefined,
       location_id: undefined,
     },
   })

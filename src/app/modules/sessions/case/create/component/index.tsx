@@ -35,7 +35,7 @@ export const NewSessionDialog = () => {
             <div className="grid gap-5">
               <FormField
                 control={form.control}
-                name="receiver_id"
+                name="reciever_id"
                 render={({ field }) => {
                   return (
                     <FormItem>

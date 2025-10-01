@@ -1,10 +1,11 @@
 import { useParams } from '@tanstack/react-router'
 
 import { useCloseSessionRequest } from '@/app/modules/sessions/case/close/request'
+import { SESSION_PAGE_ROUTE } from '@/app/modules/sessions/route'
 
 const useCloseSessionPresenter = () => {
   const { mutateAsync } = useCloseSessionRequest()
-  const { id } = useParams({ from: '/session/$id' })
+  const { id } = useParams({ from: SESSION_PAGE_ROUTE.id })
 
   const handleCloseSession = async () => {
     await mutateAsync({ id })

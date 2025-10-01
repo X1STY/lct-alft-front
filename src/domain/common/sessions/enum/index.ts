@@ -1,10 +1,10 @@
 enum ESessionStatus {
-  OPEN_WAITING_FOR_APPROVAL = 'OPEN_WAITING_FOR_APPROVAL',
-  OPEN_APPROVED = 'OPEN_APPROVED',
-  OPENED = 'OPENED',
-  CLOSE_WAITING_FOR_APPROVAL = 'CLOSE_WAITING_FOR_APPROVAL',
-  CLOSE_APPROVED = 'CLOSE_APPROVED',
-  CLOSED = 'CLOSED',
+  OPEN_WAITING_FOR_APPROVAL = 'open_waiting_for_aproval',
+  OPEN_APPROVED = 'open_approved',
+  OPENED = 'opened',
+  CLOSE_WAITING_FOR_APPROVAL = 'close_waiting_for_approval',
+  CLOSE_APPROVED = 'close_approved',
+  CLOSED = 'close',
 }
 
 const SessionStatusName = {

@@ -11,10 +11,11 @@ import { SessionStatusColor, SessionStatusName } from '@/domain/common/sessions/
 import { useCollectionsContext } from '@/app/common/providers/collections/context'
 
 const SessionHeader: FC<ISessionHeaderProps> = ({ session }) => {
-  const { employeesCollection, kitCollection } = useCollectionsContext()
+  const { employeesCollection, kitCollection, locationCollection } = useCollectionsContext()
 
   const receiver = employeesCollection.find((item) => item.id === session.receiver_id)
   const kit = kitCollection.find((item) => item.id === session.kit_id)
+  const location = locationCollection.find((item) => item.id === session.location_id)
 
   return (
     <section className="bg-background flex flex-col gap-4 rounded-xl p-4">
@@ -23,11 +24,15 @@ const SessionHeader: FC<ISessionHeaderProps> = ({ session }) => {
         <div className="flex flex-row items-center gap-8">
           <div className="flex flex-col gap-1">
             <span className="text-sm text-neutral-500">Получатель</span>
-            <div className="">{receiver?.name}</div>
+            <div className="">{receiver?.name ?? 'Тестовый получатель'}</div>
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-sm text-neutral-500">Набор</span>
             <div className="">{kit?.name}</div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <span className="text-sm text-neutral-500">Станция</span>
+            <div className="">{location?.name}</div>
           </div>
           {isNotNil(session.opened_at) && (
             <div className="flex flex-col gap-1">

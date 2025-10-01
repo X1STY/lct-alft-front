@@ -1,5 +1,6 @@
 enum ERouterPath {
   SESSIONS = '/sessions',
+  TEST_MANY_IMAGES = 'test-many-images',
 }
 
 enum EIdentifyRoutePath {

@@ -16,7 +16,7 @@ const EmployeesSelect: FC<IEmployeeSelectProps> = ({
 
   return (
     <Select
-      value={value}
+      value={String(value)}
       onValueChange={(selectedValue) => {
         const newValue = selectedValue === 'all' ? '' : selectedValue
         onChange?.(newValue)
@@ -27,7 +27,7 @@ const EmployeesSelect: FC<IEmployeeSelectProps> = ({
       <SelectContent>
         {Boolean(isRenderClearOption) && <SelectItem value="all">Все сотрудники</SelectItem>}
         {employeesCollection.map((employee) => (
-          <SelectItem key={employee.id} value={employee.id}>
+          <SelectItem key={employee.id} value={String(employee.id)}>
             {employee.name}
           </SelectItem>
         ))}

@@ -19,7 +19,7 @@ import { LocationsSelect } from '@/app/modules/collections/locations/component'
 const SessionsListPage = () => {
   const filters = useForm<IGetSessionsPort>({
     resolver: zodResolver(GetSessionsPortSchema),
-    defaultValues: { employeeId: '', locationId: '', status: ESessionStatus.OPENED },
+    defaultValues: { employeeId: undefined, locationId: undefined, status: ESessionStatus.OPENED },
   })
 
   const status = useWatch({ control: filters.control, name: 'status' })

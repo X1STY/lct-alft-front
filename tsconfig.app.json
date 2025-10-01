@@ -13,7 +13,6 @@
     "module": "ESNext",
     "isolatedModules": true,
     "resolveJsonModule": true,
-    "noEmit": true,
     "jsx": "react-jsx",
     "sourceMap": true,
     "declaration": true,
@@ -27,9 +26,7 @@
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
@@ -37,6 +34,6 @@
   "references": [
     {
       "path": "./tsconfig.node.json"
-    },
+    }
   ]
 }

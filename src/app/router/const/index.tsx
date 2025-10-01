@@ -9,6 +9,7 @@ import { NotFound } from '@/app/tools/layout/not-found/component'
 import { ModuleLayout } from '@/app/tools/layout/module/component'
 import { getTanstackQuery } from '@/app/common/providers/tanstack-query/provider'
 import { SESSION_LIST_PAGE_ROUTE } from '@/app/modules/sessions/route'
+import { TEST_MANY_IMAGES_ROUTE } from '@/app/modules/test-many-images/route'
 
 const ROOT_ROUTE = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -24,7 +25,9 @@ const MODULE_PAGE_ROUTE = createRoute({
   getParentRoute: () => ROOT_ROUTE,
 })
 
-const ROUTE_TREE = ROOT_ROUTE.addChildren([MODULE_PAGE_ROUTE.addChildren([SESSION_LIST_PAGE_ROUTE])])
+const ROUTE_TREE = ROOT_ROUTE.addChildren([
+  MODULE_PAGE_ROUTE.addChildren([SESSION_LIST_PAGE_ROUTE, TEST_MANY_IMAGES_ROUTE]),
+])
 
 const ROUTER = createRouter({
   routeTree: ROUTE_TREE,

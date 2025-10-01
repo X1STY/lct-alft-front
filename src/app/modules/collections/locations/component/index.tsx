@@ -16,7 +16,7 @@ const LocationsSelect: FC<ILocationsSelectProps> = ({
 
   return (
     <Select
-      value={value}
+      value={String(value)}
       onValueChange={(selectedValue) => {
         const newValue = selectedValue === 'all' ? '' : selectedValue
         onChange?.(newValue)
@@ -27,7 +27,7 @@ const LocationsSelect: FC<ILocationsSelectProps> = ({
       <SelectContent>
         {Boolean(isRenderClearOption) && <SelectItem value="all">Все станции</SelectItem>}
         {locationCollection.map((location) => (
-          <SelectItem key={location.id} value={location.id}>
+          <SelectItem key={location.id} value={String(location.id)}>
             {location.name}
           </SelectItem>
         ))}

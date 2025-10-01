@@ -11,7 +11,7 @@ const KitsSelect: FC<IKitsSelectProps> = ({ onChange, value = 'all', isRenderCle
 
   return (
     <Select
-      value={value}
+      value={String(value)}
       onValueChange={(selectedValue) => {
         const newValue = selectedValue === 'all' ? '' : selectedValue
         onChange?.(newValue)
@@ -22,7 +22,7 @@ const KitsSelect: FC<IKitsSelectProps> = ({ onChange, value = 'all', isRenderCle
       <SelectContent>
         {Boolean(isRenderClearOption) && <SelectItem value="all">Все наборы</SelectItem>}
         {kitCollection.map((kit) => (
-          <SelectItem key={kit.id} value={kit.id}>
+          <SelectItem key={kit.id} value={String(kit.id)}>
             {kit.name}
           </SelectItem>
         ))}

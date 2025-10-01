@@ -1,7 +1,7 @@
 import type { IBaseResponse } from '@/domain/common/http/interface'
 
 interface ILocationDto {
-  id: number
+  id: string
   name: string
 }
 

@@ -16,17 +16,17 @@ import { useCollectionsContext } from '@/app/common/providers/collections/contex
 const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
   const { employeesCollection, kitCollection, locationCollection } = useCollectionsContext()
 
-  const findEmployeeName = (id: number): string => {
+  const findEmployeeName = (id: string): string => {
     const employee = employeesCollection.find((emp) => emp.id === id)
     return employee?.name ?? ''
   }
 
-  const findKitName = (id: number): string => {
+  const findKitName = (id: string): string => {
     const kit = kitCollection.find((kitItem) => kitItem.id === id)
     return kit?.name ?? ''
   }
 
-  const findLocationName = (id: number): string => {
+  const findLocationName = (id: string): string => {
     const location = locationCollection.find((loc) => loc.id === id)
     return location?.name ?? ''
   }
@@ -42,7 +42,7 @@ const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
         accessorKey: 'receiver_id',
         header: 'Получатель',
         cell: (cell) => {
-          const receiverId = cell.getValue<number>()
+          const receiverId = cell.getValue<string>()
           const employeeName = findEmployeeName(receiverId)
           return <div className="font-medium">{employeeName}</div>
         },
@@ -51,7 +51,7 @@ const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
         accessorKey: 'kit_id',
         header: 'Набор',
         cell: (cell) => {
-          const kitId = cell.getValue<number>()
+          const kitId = cell.getValue<string>()
           const kitName = findKitName(kitId)
           return <div>{kitName}</div>
         },
@@ -60,7 +60,7 @@ const useSessionsColumns = (): Array<ColumnDef<ISessionDto>> => {
         accessorKey: 'location_id',
         header: 'Станция',
         cell: (cell) => {
-          const locationId = cell.getValue<number>()
+          const locationId = cell.getValue<string>()
           const locationName = findLocationName(locationId)
           return <div>{locationName}</div>
         },

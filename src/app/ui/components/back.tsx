@@ -15,7 +15,7 @@ const Back = () => {
   }
 
   return canGoBack ? (
-    <Link className="back" to="" onClick={handleOnBack}>
+    <Link className="flex flex-row items-center gap-1" to="" onClick={handleOnBack}>
       <ArrowLeftIcon />
       <span className="text-sm">Назад</span>
     </Link>

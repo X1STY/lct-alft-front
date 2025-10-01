@@ -14,7 +14,7 @@ const useGetOneSessionRequest = () => {
 
   return useQuery({
     queryFn: callback,
-    queryKey: [EQueryKeys.GET_SESSION, id],
+    queryKey: [EQueryKeys.GET_SESSION, { id }],
   })
 }
 

@@ -100,11 +100,7 @@ const TestManyImagesListPage = () => {
                     width: '100%',
                     transform: `translateY(${virtualItem.start}px)`,
                   }}>
-                  <ImageResult
-                    image={selectedImages[virtualItem.index]}
-                    result={data[virtualItem.index]}
-                    index={virtualItem.index}
-                  />
+                  <ImageResult result={data[virtualItem.index]} index={virtualItem.index} />
                 </div>
               ))}
             </div>

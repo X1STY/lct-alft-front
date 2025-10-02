@@ -3,9 +3,11 @@ interface IDetection {
   class_name: string
   confidence: number
 }
+
 interface IDetectedImage {
   success: boolean
   detections: Array<IDetection>
+  image: string
   total_detections: number
 }
 

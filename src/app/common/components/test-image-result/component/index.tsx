@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { Loader2Icon } from 'lucide-react'
 
@@ -8,27 +8,18 @@ import { DataTable } from '@/app/ui/components/data-table'
 import { useDetectionColumns } from '@/app/modules/test-many-images/case/list/table/columns'
 import { AspectRatio } from '@/app/ui/components/aspect-ratio'
 
-const ImageResult = ({ image, result, index }: IImageResultProps) => {
+const ImageResult = ({ result, index }: IImageResultProps) => {
+  const { image } = result
   const [isLoading, setIsLoading] = useState(true)
-  const [imageUrl, setImageUrl] = useState<string>('')
   const columns = useDetectionColumns()
 
-  useEffect(() => {
-    const url = URL.createObjectURL(image)
-    setImageUrl(url)
-
-    return () => {
-      URL.revokeObjectURL(url)
-    }
-  }, [image])
+  const imageUrl = image.startsWith('data:') ? image : `data:image/jpeg;base64,${image}`
 
   return (
     <div className="flex flex-col gap-2 rounded-lg border p-4">
-      <h3 className="w-full truncate text-lg font-medium">
-        Изображение {index + 1}: {image.name}
-      </h3>
+      <h3 className="w-full truncate text-lg font-medium">Изображение {index + 1}</h3>
 
-      <div className="grid grid-cols-[35%_65%] space-x-4">
+      <div className="grid grid-cols-[50%_50%] space-x-4">
         <div className="w-[full]">
           <div className="relative size-full">
             {isLoading && (
@@ -36,7 +27,7 @@ const ImageResult = ({ image, result, index }: IImageResultProps) => {
                 <Loader2Icon className="size-12 animate-spin" />
               </div>
             )}
-            <AspectRatio ratio={3 / 2}>
+            <AspectRatio ratio={4 / 3}>
               <img
                 src={imageUrl}
                 alt={`Загруженное изображение ${index + 1}`}

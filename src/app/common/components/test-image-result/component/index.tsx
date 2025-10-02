@@ -6,6 +6,7 @@ import type { IImageResultProps } from '@/app/common/components/test-image-resul
 
 import { DataTable } from '@/app/ui/components/data-table'
 import { useDetectionColumns } from '@/app/modules/test-many-images/case/list/table/columns'
+import { AspectRatio } from '@/app/ui/components/aspect-ratio'
 
 const ImageResult = ({ image, result, index }: IImageResultProps) => {
   const [isLoading, setIsLoading] = useState(true)
@@ -27,7 +28,7 @@ const ImageResult = ({ image, result, index }: IImageResultProps) => {
         Изображение {index + 1}: {image.name}
       </h3>
 
-      <div className="grid grid-cols-[35%_65%] gap-4">
+      <div className="grid grid-cols-[35%_65%] space-x-4">
         <div className="w-[full]">
           <div className="relative size-full">
             {isLoading && (
@@ -35,16 +36,18 @@ const ImageResult = ({ image, result, index }: IImageResultProps) => {
                 <Loader2Icon className="size-12 animate-spin" />
               </div>
             )}
-            <img
-              src={imageUrl}
-              alt={`Загруженное изображение ${index + 1}`}
-              className={`size-full rounded object-cover transition-opacity duration-300 ${
-                isLoading ? 'opacity-0' : 'opacity-100'
-              }`}
-              onLoad={() => {
-                setIsLoading(false)
-              }}
-            />
+            <AspectRatio ratio={3 / 2}>
+              <img
+                src={imageUrl}
+                alt={`Загруженное изображение ${index + 1}`}
+                className={`size-full rounded object-cover transition-opacity duration-300 ${
+                  isLoading ? 'opacity-0' : 'opacity-100'
+                }`}
+                onLoad={() => {
+                  setIsLoading(false)
+                }}
+              />
+            </AspectRatio>
           </div>
         </div>
 

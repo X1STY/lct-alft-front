@@ -2,6 +2,20 @@
 @import './style' layer(components);
 @custom-variant dark (&:is(.dark *));
 
+* {
+  ::-webkit-scrollbar {
+    width: 18px;
+    border-radius: 50%;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 1000px;
+    background-color: var(--color-neutral-400);
+    background-clip: padding-box;
+    border: 5px solid transparent;
+  }
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

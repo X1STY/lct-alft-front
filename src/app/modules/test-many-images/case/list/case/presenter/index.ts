@@ -12,9 +12,15 @@ const useTestManyImagesPresenter = () => {
     resolver: zodResolver(TestManyImagesSchema),
   })
 
-  const { mutateAsync, isPending, data: responseData, isIdle } = useTestManyImagesRequest()
+  const { mutateAsync, isPending, data: responseData, isError } = useTestManyImagesRequest()
+
   const handleSubmit = form.handleSubmit(async (data) => {
-    await mutateAsync(data)
+    const formData = new FormData()
+
+    data.image.forEach((file: File) => {
+      formData.append('image', file)
+    })
+    return mutateAsync(formData)
   })
 
   return {
@@ -22,7 +28,7 @@ const useTestManyImagesPresenter = () => {
     handleSubmit,
     isPending,
     data: responseData,
-    isIdle,
+    isError,
   }
 }
 

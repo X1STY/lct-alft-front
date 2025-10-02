@@ -11,4 +11,4 @@ interface IDetectedImage {
 
 type ITestManyImagesDto = Array<IDetectedImage>
 
-export type { ITestManyImagesDto }
+export type { ITestManyImagesDto, IDetectedImage, IDetection }

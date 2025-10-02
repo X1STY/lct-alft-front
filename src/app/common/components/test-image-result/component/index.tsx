@@ -23,12 +23,12 @@ const ImageResult = ({ image, result, index }: IImageResultProps) => {
 
   return (
     <div className="flex flex-col gap-2 rounded-lg border p-4">
-      <h3 className="text-lg font-medium">
+      <h3 className="w-full truncate text-lg font-medium">
         Изображение {index + 1}: {image.name}
       </h3>
 
       <div className="grid grid-cols-[35%_65%] gap-4">
-        <div className="h-[240px] w-[360px]">
+        <div className="w-[full]">
           <div className="relative size-full">
             {isLoading && (
               <div className="absolute inset-0 flex items-center justify-center rounded bg-gradient-to-br from-[#ffd0c2] to-[#3d3d3d]">

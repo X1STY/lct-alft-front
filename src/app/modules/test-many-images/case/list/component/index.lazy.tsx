@@ -17,14 +17,14 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/app/ui/co
 const ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 
 const TestManyImagesListPage = () => {
-  const { form, handleSubmit, data, isPending } = useTestManyImagesPresenter()
+  const { form, handleSubmit, data, isPending, clearData } = useTestManyImagesPresenter()
   const selectedImages = useWatch({ control: form.control, name: 'image' })
   const parentRef = useRef<HTMLDivElement>(null)
 
   const virtualizer = useVirtualizer({
     count: data?.length ?? 0,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 380,
+    estimateSize: () => 450,
     overscan: 2,
     gap: 16,
   })
@@ -47,6 +47,9 @@ const TestManyImagesListPage = () => {
                       className="w-fit"
                       onChange={(e) => {
                         const files = e.target.files
+                        if (data && files && files.length > 0) {
+                          clearData()
+                        }
                         field.onChange(files ? Array.from(files) : [])
                       }}
                     />
@@ -68,15 +71,15 @@ const TestManyImagesListPage = () => {
           <li>Нажмите на поле ввода ("Выбрать файлы")</li>
           <li>В появившемся диалоге зайдите в папку с изображениями, выделите все (CTRL+A) и подтвердите выбор</li>
           <li>Нажмите "отправить"</li>
-          <li>Дождитесь результата обработки изображений</li>
+          <li>Дождитесь результата обработки изображений (Может занять некоторое время для обработки)</li>
           <li>Сравните полученный результат с эталонным</li>
         </ul>
       )}
 
       {isNotNil(data) && isNotNil(selectedImages) && (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-1 flex-col gap-6">
           <h2 className="text-xl font-semibold">Результаты обработки</h2>
-          <div ref={parentRef} className="h-full flex-1 overflow-auto">
+          <div ref={parentRef} className="h-[calc(100vh-275px)] overflow-auto rounded-md">
             <div
               style={{
                 height: `${virtualizer.getTotalSize()}px`,
@@ -86,12 +89,15 @@ const TestManyImagesListPage = () => {
               {virtualizer.getVirtualItems().map((virtualItem) => (
                 <div
                   key={virtualItem.key}
+                  data-index={virtualItem.index}
+                  ref={(node) => {
+                    virtualizer.measureElement(node)
+                  }}
                   style={{
                     position: 'absolute',
                     top: 0,
                     left: 0,
                     width: '100%',
-                    height: `${virtualItem.size}px`,
                     transform: `translateY(${virtualItem.start}px)`,
                   }}>
                   <ImageResult

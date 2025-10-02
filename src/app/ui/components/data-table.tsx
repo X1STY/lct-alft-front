@@ -18,7 +18,7 @@ export function DataTable<TData, TValue>({ columns, data, isLoading = true }: ID
   })
 
   return (
-    <div className="overflow-hidden rounded-md border">
+    <div className="w-full overflow-hidden rounded-md border">
       <Table className="bg-background">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (

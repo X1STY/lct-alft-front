@@ -22,8 +22,8 @@ interface IImageUploaderProps {
 export function ImageUploader({
   value,
   onChange,
-  maxSize = 5,
-  acceptedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'],
+  maxSize = 10,
+  acceptedTypes = ['image/jpeg', 'image/png', 'image/webp'],
   className,
   disabled = false,
   error,

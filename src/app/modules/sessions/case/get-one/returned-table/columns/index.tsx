@@ -21,6 +21,14 @@ const useSessionToolsReturnedColumns = (): Array<ColumnDef<ISessionToolDto>> => 
       {
         accessorKey: 'quantity_returned',
         header: 'Распознанное количество',
+        cell: ({ getValue, row }) => {
+          const value = getValue<string>()
+          return (
+            <div className={parseInt(value) !== row.original.quantity_required ? 'text-destructive' : undefined}>
+              {value}
+            </div>
+          )
+        },
       },
       {
         accessorKey: 'quantity_required',
